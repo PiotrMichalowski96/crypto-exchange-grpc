@@ -1,0 +1,3 @@
+spring.application.name: crypto-exchange-grpc
+
+crypto-api.url: https://api.minerstat.com/v2
