@@ -14,7 +14,7 @@ import pl.piotr.michalowski.cryptoexchange.entity.Crypto
 
 @ActiveProfiles("TEST")
 @AutoConfigureDataMongo
-@SpringBootTest
+@SpringBootTest(properties = ["grpc.server.port=9091"])
 @EnableAutoConfiguration
 @DirtiesContext
 class FetchCryptoServiceTest(
