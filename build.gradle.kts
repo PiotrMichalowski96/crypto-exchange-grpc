@@ -26,7 +26,9 @@ dependencies {
     implementation("net.devh:grpc-spring-boot-starter:3.1.0.RELEASE")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring3x:4.12.6")
 }
 
 dependencyManagement {

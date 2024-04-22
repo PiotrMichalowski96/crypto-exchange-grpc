@@ -11,7 +11,7 @@ data class CryptoResponse(
     val type: String,
     val algorithm: String,
     @JsonProperty("network_hashrate")
-    val networkHashrate: BigInteger,
+    val networkHashrate: String,
     val difficulty: String,
     val reward: String,
     @JsonProperty("reward_unit")
