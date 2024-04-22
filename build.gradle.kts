@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
+    id("jacoco")
+    id("org.sonarqube") version "5.0.0.4638"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
 }
@@ -16,6 +18,20 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "PiotrMichalowski96_crypto-exchange-grpc")
+        property("sonar.organization", "piotrmichalowski96")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.exclusions", "**/config/*, **/entity/*, **/dto/*")
+        property("sonar.cpd.exclusions", "**/config/*")
+    }
 }
 
 val springCloudVersion = "2023.0.1"
@@ -46,4 +62,15 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = true
+    }
 }
