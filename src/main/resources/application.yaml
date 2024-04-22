@@ -2,7 +2,7 @@ spring.application.name: crypto-exchange-grpc
 
 spring.data.mongodb:
   host: localhost
-  port: 0
+  port: 27017
   database: crypto-currencies
 
 crypto-api.url: https://api.minerstat.com/v2

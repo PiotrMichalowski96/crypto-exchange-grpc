@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 import pl.piotr.michalowski.cryptoexchange.config.FeignConfig
 import pl.piotr.michalowski.cryptoexchange.dto.CryptoResponse
 
-@SpringBootTest(properties = ["de.flapdoodle.mongodb.embedded.version=7.0.8"])
+@ActiveProfiles("TEST")
+@SpringBootTest
 @Import(FeignConfig::class)
 class CryptoApiClientTest(@Autowired private val apiClient: CryptoApiClient) {
 

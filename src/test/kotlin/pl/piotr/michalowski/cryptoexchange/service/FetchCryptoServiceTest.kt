@@ -9,10 +9,12 @@ import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataM
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.test.annotation.DirtiesContext
+import org.springframework.test.context.ActiveProfiles
 import pl.piotr.michalowski.cryptoexchange.entity.Crypto
 
+@ActiveProfiles("TEST")
 @AutoConfigureDataMongo
-@SpringBootTest(properties = ["de.flapdoodle.mongodb.embedded.version=7.0.8"])
+@SpringBootTest
 @EnableAutoConfiguration
 @DirtiesContext
 class FetchCryptoServiceTest(

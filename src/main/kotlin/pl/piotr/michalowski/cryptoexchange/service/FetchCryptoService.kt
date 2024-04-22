@@ -19,7 +19,7 @@ class FetchCryptoService(
 ) {
 
     @Transactional
-    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.HOURS)
+    @Scheduled(fixedDelay = 60, initialDelay = 1, timeUnit = TimeUnit.MINUTES)
     fun fetchCrypto() {
         fetchAndLogCryptos()
             .map { it.toEntity() }
