@@ -34,7 +34,7 @@ jobs:
           command: chmod +x ./gradlew
       - run:
           name: Run tests and Sonar analysis
-          command: ./gradlew test jacocoRootReport sonar
+          command: ./gradlew test jacocoTestReport sonar
       - store_test_results:
           path: build/reports/jacoco/test
       - store_artifacts:
