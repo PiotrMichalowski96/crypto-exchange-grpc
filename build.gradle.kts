@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
     id("jacoco")
     id("org.sonarqube") version "5.0.0.4638"
+    id("com.google.protobuf") version "0.9.4"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
 }
@@ -18,6 +19,35 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+val grpcKotlinVersion = "1.4.1"
+val grpcVersion = "1.63.0"
+val protobufVersion = "4.26.1"
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
+    }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion"
+        }
+        create("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:$grpcKotlinVersion:jdk8@jar"
+        }
+    }
+    generateProtoTasks {
+        all().forEach {
+            it.plugins {
+                create("grpc")
+                create("grpckt")
+            }
+            it.builtins {
+                create("kotlin")
+            }
+        }
+    }
 }
 
 jacoco {
@@ -43,13 +73,16 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
+    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
+    implementation("io.grpc:grpc-protobuf:$grpcVersion")
+    implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring3x:4.12.6")
 }
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
     }
 }
 
