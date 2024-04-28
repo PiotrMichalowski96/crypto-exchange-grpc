@@ -14,8 +14,8 @@ private val logger = KotlinLogging.logger {}
 
 @Service
 class FetchCryptoService(
-    val apiClient: CryptoApiClient,
-    val repository: CryptoRepository
+    private val apiClient: CryptoApiClient,
+    private val repository: CryptoRepository
 ) {
 
     @Transactional
