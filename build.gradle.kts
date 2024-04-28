@@ -23,7 +23,7 @@ repositories {
 
 val grpcKotlinVersion = "1.4.1"
 val grpcVersion = "1.63.0"
-val protobufVersion = "4.26.1"
+val protobufVersion = "3.25.3"
 
 protobuf {
     protoc {
@@ -94,6 +94,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
+    dependsOn(tasks.generateProto)
     useJUnitPlatform()
 }
 
