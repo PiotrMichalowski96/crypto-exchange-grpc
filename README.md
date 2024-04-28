@@ -2,9 +2,9 @@
 [![<PiotrMichalowski96>](https://circleci.com/gh/PiotrMichalowski96/crypto-exchange-grpc.svg?style=svg)](https://circleci.com/gh/PiotrMichalowski96/ImportedCars)
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_crypto-exchange-grpc)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=PiotrMichalowski96_crypto-exchange-grpc&metric=bugs)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_ImportedCars)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PiotrMichalowski96_crypto-exchange-grpc&metric=coverage)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_ImportedCars)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=PiotrMichalowski96_crypto-exchange-grpc&metric=ncloc)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_ImportedCars)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=PiotrMichalowski96_crypto-exchange-grpc&metric=bugs)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_crypto-exchange-grpc)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PiotrMichalowski96_crypto-exchange-grpc&metric=coverage)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_crypto-exchange-grpc)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=PiotrMichalowski96_crypto-exchange-grpc&metric=ncloc)](https://sonarcloud.io/dashboard?id=PiotrMichalowski96_crypto-exchange-grpc)
 
 Crypto Exchange Service allows to fetch cryptocurrency data via gRPC.
 
