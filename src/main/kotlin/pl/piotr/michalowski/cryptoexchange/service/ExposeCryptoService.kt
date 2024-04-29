@@ -13,7 +13,7 @@ import pl.piotr.michalowski.cryptoexchange.repository.CryptoRepository
 class ExposeCryptoService(private val repository: CryptoRepository) : CryptoServiceGrpc.CryptoServiceImplBase() {
 
     override fun findAll(request: Empty?, responseObserver: StreamObserver<CryptoProto.CryptoCurrencies>?) {
-        val cryptos: List<CryptoProto.CryptoCurrency> = repository.findAll()
+        val cryptos: List<CryptoProto.CryptoCurrency> = repository.findAllByOrderByTimestampDesc()
             .map { it.toProto() }
         val cryptosProto: CryptoProto.CryptoCurrencies = CryptoProto.CryptoCurrencies.newBuilder()
             .addAllCryptos(cryptos)

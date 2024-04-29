@@ -6,5 +6,7 @@ import java.util.UUID
 
 interface CryptoRepository: MongoRepository<Crypto, UUID> {
 
+    fun findAllByOrderByTimestampDesc(): List<Crypto>
+
     fun findFirstByCryptoCurrencyOrderByTimestampDesc(cryptoCurrency: String): Crypto?
 }
