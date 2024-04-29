@@ -19,7 +19,10 @@ class FetchCryptoService(
 ) {
 
     @Transactional
-    @Scheduled(fixedDelay = 60, initialDelay = 1, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(
+        fixedDelayString = "\${crypto-api.scheduler.delay-minutes}",
+        initialDelayString = "\${crypto-api.scheduler.init-delay-minutes}",
+        timeUnit = TimeUnit.MINUTES)
     fun fetchCrypto() {
         fetchAndLogCryptos()
             .map { it.toEntity() }

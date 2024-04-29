@@ -5,4 +5,8 @@ spring.data.mongodb:
   port: 27017
   database: crypto-currencies
 
-crypto-api.url: https://api.minerstat.com/v2
+crypto-api:
+  url: https://api.minerstat.com/v2
+  scheduler:
+    delay-minutes: 60
+    init-delay-minutes: 1
