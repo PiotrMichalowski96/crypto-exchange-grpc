@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import pl.piotr.michalowski.cryptoexchange.dto.CryptoResponse
 import pl.piotr.michalowski.cryptoexchange.entity.Crypto
+import pl.piotr.michalowski.cryptoexchange.model.CryptoProto
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.time.OffsetDateTime
@@ -60,5 +61,32 @@ class CryptoExtensionTest {
             .usingRecursiveComparison()
             .ignoringFields("id")
             .isEqualTo(expectedEntity)
+    }
+
+    @Test
+    fun `given crypto entity when use extension function then return crypto proto`() {
+        //given
+        val id = UUID.randomUUID()
+        val cryptoEntity = Crypto(
+            id = id,
+            cryptoCurrency = "XYZ",
+            amount = BigDecimal.valueOf(1.01),
+            targetCurrency = "PLN",
+            timestamp = OffsetDateTime.of(2024, 4, 27, 17, 56, 59, 0, ZoneOffset.UTC)
+        )
+
+        val expectedProto = CryptoProto.CryptoCurrency.newBuilder()
+            .setId(id.toString())
+            .setName("XYZ")
+            .setAmount(1.01)
+            .setTargetCurrency("PLN")
+            .setTimestamp("2024-04-27T17:56:59Z")
+            .build()
+
+        //when
+        val actualProto = cryptoEntity.toProto()
+
+        //then
+        assertThat(actualProto).isEqualTo(expectedProto)
     }
 }

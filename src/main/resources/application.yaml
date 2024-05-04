@@ -1,8 +1,15 @@
 spring.application.name: crypto-exchange-grpc
 
 spring.data.mongodb:
-  host: localhost
+  host: 127.0.0.1
   port: 27017
   database: crypto-currencies
+  username: root
+  password: example
+  authentication-database: admin
 
-crypto-api.url: https://api.minerstat.com/v2
+crypto-api:
+  url: https://api.minerstat.com/v2
+  scheduler:
+    delay-minutes: 60
+    init-delay-minutes: 1
