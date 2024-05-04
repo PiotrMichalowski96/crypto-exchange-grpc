@@ -65,19 +65,22 @@ sonarqube {
 }
 
 val springCloudVersion = "2023.0.1"
+val grpcSpringBootStarterVersion = "3.1.0.RELEASE"
+val kotlinLoggingVersion = "6.0.9"
+val embedMongoVersion = "4.12.6"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    implementation("net.devh:grpc-spring-boot-starter:3.1.0.RELEASE")
+    implementation("net.devh:grpc-spring-boot-starter:$grpcSpringBootStarterVersion")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("io.github.oshai:kotlin-logging-jvm:6.0.9")
+    implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
     implementation("com.google.protobuf:protobuf-kotlin:$protobufVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring3x:4.12.6")
+    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring3x:$embedMongoVersion")
 }
 
 dependencyManagement {
