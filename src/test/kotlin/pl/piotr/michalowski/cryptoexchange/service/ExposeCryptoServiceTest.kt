@@ -1,6 +1,7 @@
 package pl.piotr.michalowski.cryptoexchange.service
 
 import com.google.protobuf.Empty
+import com.google.protobuf.StringValue
 import pl.piotr.michalowski.cryptoexchange.model.CryptoServiceGrpc
 import net.devh.boot.grpc.client.inject.GrpcClient
 import org.junit.jupiter.api.Test
@@ -50,7 +51,7 @@ class ExposeCryptoServiceTest(
             )
         )
 
-        val expectedCryptos = CryptoProto.CryptoCurrencies.newBuilder()
+        val expectedCryptosResponse = CryptoProto.CryptoCurrencies.newBuilder()
             .addCryptos(
                 CryptoProto.CryptoCurrency.newBuilder()
                     .setName("BTC")
@@ -70,12 +71,41 @@ class ExposeCryptoServiceTest(
         cryptosToSave.forEach { mongoTemplate.save(it) }
 
         //when
-        val cryptoCurrencies = stub.findAll(Empty.getDefaultInstance())
+        val cryptosResponse = stub.findAll(Empty.getDefaultInstance())
 
         //then
-        assertThat(cryptoCurrencies.cryptosList)
+        assertThat(cryptosResponse.cryptosList)
             .usingRecursiveComparison()
             .ignoringFields("id_", "timestamp_", "memoizedHashCode", "memoizedIsInitialized")
-            .isEqualTo(expectedCryptos.cryptosList)
+            .isEqualTo(expectedCryptosResponse.cryptosList)
+    }
+
+    @Test
+    fun `given crypto data in db when call gRPC find by name then returns crypto`() {
+        //given
+        val cryptoToSave = Crypto(
+            id = UUID.randomUUID(),
+            cryptoCurrency = "DOGE",
+            amount = BigDecimal.valueOf(0.16014022996386),
+            targetCurrency = "USD",
+            timestamp = OffsetDateTime.now()
+        )
+
+        val expectedCryptoResponse = CryptoProto.CryptoCurrency.newBuilder()
+            .setName("DOGE")
+            .setAmount(0.16014022996386)
+            .setTargetCurrency("USD")
+            .build()
+
+        mongoTemplate.save(cryptoToSave)
+
+        //when
+        val cryptoResponse = stub.findByName(StringValue.of("DOGE"))
+
+        //then
+        assertThat(cryptoResponse)
+            .usingRecursiveComparison()
+            .ignoringFields("id_", "timestamp_", "memoizedHashCode", "memoizedIsInitialized")
+            .isEqualTo(expectedCryptoResponse)
     }
 }
